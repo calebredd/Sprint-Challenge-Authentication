@@ -28,7 +28,7 @@ router.get('/:userId',(req,res)=>{
 
 router.post('/register', (req, res) => {
   // implement registration
-const {username, password}=req.body;
+const {username, password}=req.headers;
 const user={username};
 const hash=bcrypt.hashSync(password,10);
 user.password=hash;
@@ -46,7 +46,7 @@ Users.insert(user)
 
 router.post('/login', (req, res) => {
   // implement login
-  const {username, password}=req.body;
+  const {username, password}=req.headers;
 
   Users.findBy({username}).first().then(user=>{
     if(user&& bcrypt.compareSync(password, user.password)){
