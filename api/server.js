@@ -12,8 +12,12 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
+server.get('/',(req,res)=>{
+  res.status(200).json({message:"Welcome to the Server"});
+  }
+)
 server.get('/api',(req,res)=>{
-  res.status(200).send("Welcome to the API");
+  res.status(200).json({message:"Welcome to the API"});
   }
 )
 server.use('/api/auth', authRouter);
