@@ -14,6 +14,18 @@ router.get('/login', (req, res) => {
 
 });
 
+router.get('/:userId',(req,res)=>{
+  Users.findById(req.params.userId).then(user=>{
+    if(user){
+      res.status(200).json(user);
+    }else{
+      res.status(500).json({errorMessage:"That user does not exist!"});
+    }
+  }).catch(err=>{
+    res.status(500).json({errorMessage:"Unable to access that user"});
+  })
+})
+
 router.post('/register', (req, res) => {
   // implement registration
 const {username, password}=req.body;
